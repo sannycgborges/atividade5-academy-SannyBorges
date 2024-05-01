@@ -1,35 +1,24 @@
 export default class NovoUsuarioPage {
-    inputName = "#name";
-    inputEmail = "#email";
+    inputName = 'input[name="name"]';
+    inputEmail = 'input[type="email"]';
 
-    linkVoltar = '[href="/users"]'
+    buttonBack = '[href="/users"]'
 
-    buttonClear = '[data-test-id="clearButton"]';
     buttonSubmit = 'button[type="submit"]';
-    listaUsuarios = '#lista-usuarios';
 
-    setUsername(username) {
-        cy.get(this.inputName).type(username);
+    setInputName(value) {
+        cy.get(this.inputName).type(value);
     }
 
-    getUsername() {
-        return cy.get(this.inputName);
-    }
-
-    setEmail(email) {
-        cy.get(this.inputEmail).type(email);
-    }
-
-    getError() {
-        return cy.get('span[class="sc-cPiKLX feFrSQ"]').invoke('text').as('textFunction');
-
-    }
-
-    getListaUsuarios() {
-        return cy.get(this.listaUsuarios);
+    setInputEmail(value) {
+        cy.get(this.inputEmail).type(value);
     }
 
     clickButtonSubmit() {
         cy.get(this.buttonSubmit).click();
+    }
+
+    clickButtonBack() {
+        cy.get(this.buttonBack).click();
     }
 }
