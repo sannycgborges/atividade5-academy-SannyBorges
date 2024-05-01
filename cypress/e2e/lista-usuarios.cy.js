@@ -15,11 +15,12 @@ import NovoUsuarioPage from '../support/pages/novo-usuario.page';
             cy.contains(pageListUsuarios.buttonNewUser, 'Novo').should('be.visible');
         });
 
-        it('Deve verificar se possui usuários', () => {
+        it.only('Deve verificar se possui usuários cadastrados', () => {
             cy.intercept('GET', 'api/v1/users').as('getUsuarios');
             cy.wait('@getUsuarios').then((res) => {
                 cy.wait(1000);
                 expect(res.response.statusCode).to.eq(200);
+                expect(res.response.body).not.to.be.empty;
             })
         });
 
@@ -31,7 +32,7 @@ import NovoUsuarioPage from '../support/pages/novo-usuario.page';
             cy.contains(pageListUsuarios.buttonNext, 'Próxima').should('be.visible');
         });
 
-        it('Deve pesquisar um usuário por e-mail.', () => {
+        it('Deve pesquisar um usuário cadastrado por e-mail.', () => {
             cy.intercept('GET', 'api/v1/search?value=*').as('getUsuario');
 
             pageListUsuarios.setSearch(email);
